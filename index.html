@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Scientific Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <!-- Header with theme toggle -->
+            <div class="header">
+                <h1>Scientific Calculator</h1>
+                <button class="theme-toggle" id="themeToggle">
+                    <span class="icon">🌙</span>
+                </button>
+            </div>
+
+            <!-- Display -->
+            <div class="display">
+                <div class="previous-operand" id="previousOperand"></div>
+                <div class="current-operand" id="currentOperand">0</div>
+            </div>
+
+            <!-- Calculator Buttons -->
+            <div class="buttons">
+                <!-- Row 1: Scientific functions -->
+                <button class="btn function" data-action="clear">C</button>
+                <button class="btn function" data-action="delete">DEL</button>
+                <button class="btn function" data-action="sqrt">√</button>
+                <button class="btn operator" data-action="divide">÷</button>
+
+                <!-- Row 2: Scientific functions -->
+                <button class="btn function" data-action="sin">sin</button>
+                <button class="btn function" data-action="cos">cos</button>
+                <button class="btn function" data-action="tan">tan</button>
+                <button class="btn operator" data-action="multiply">×</button>
+
+                <!-- Row 3: Numbers and operators -->
+                <button class="btn number" data-number="7">7</button>
+                <button class="btn number" data-number="8">8</button>
+                <button class="btn number" data-number="9">9</button>
+                <button class="btn operator" data-action="subtract">−</button>
+
+                <!-- Row 4: Numbers and operators -->
+                <button class="btn number" data-number="4">4</button>
+                <button class="btn number" data-number="5">5</button>
+                <button class="btn number" data-number="6">6</button>
+                <button class="btn operator" data-action="add">+</button>
+
+                <!-- Row 5: Numbers and operators -->
+                <button class="btn number" data-number="1">1</button>
+                <button class="btn number" data-number="2">2</button>
+                <button class="btn number" data-number="3">3</button>
+                <button class="btn function" data-action="power">xʸ</button>
+
+                <!-- Row 6: Special numbers and operations -->
+                <button class="btn function" data-action="pi">π</button>
+                <button class="btn number" data-number="0">0</button>
+                <button class="btn number" data-number=".">.</button>
+                <button class="btn equals" data-action="equals">=</button>
+
+                <!-- Row 7: Additional scientific functions -->
+                <button class="btn function" data-action="log">log</button>
+                <button class="btn function" data-action="ln">ln</button>
+                <button class="btn function" data-action="square">x²</button>
+                <button class="btn function" data-action="cube">x³</button>
+
+                <!-- Row 8: Constants and parentheses -->
+                <button class="btn function" data-action="e">e</button>
+                <button class="btn function" data-action="percent">%</button>
+                <button class="btn function" data-action="leftParen">(</button>
+                <button class="btn function" data-action="rightParen">)</button>
+            </div>
+
+            <!-- History Panel -->
+            <div class="history">
+                <div class="history-header">
+                    <h3>History</h3>
+                    <button class="clear-history" id="clearHistory">Clear</button>
+                </div>
+                <div class="history-list" id="historyList">
+                    <p class="no-history">No calculations yet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
