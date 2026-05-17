@@ -205,12 +205,12 @@ class Calculator {
         const num = parseFloat(number);
         if (isNaN(num)) return number;
         
-        // Handle very large or very small numbers
+    
         if (Math.abs(num) > 1e10 || (Math.abs(num) < 1e-6 && num !== 0)) {
             return num.toExponential(6);
         }
         
-        // Round to avoid floating point errors
+
         return Math.round(num * 1e10) / 1e10;
     }
 
@@ -225,12 +225,12 @@ class Calculator {
     }
 }
 
-// Initialize calculator
+
 const previousOperandElement = document.getElementById('previousOperand');
 const currentOperandElement = document.getElementById('currentOperand');
 const calculator = new Calculator(previousOperandElement, currentOperandElement);
 
-// Number buttons
+// Number
 document.querySelectorAll('[data-number]').forEach(button => {
     button.addEventListener('click', () => {
         calculator.appendNumber(button.dataset.number);
@@ -238,7 +238,7 @@ document.querySelectorAll('[data-number]').forEach(button => {
     });
 });
 
-// Operation buttons
+// plus minus divide
 document.querySelectorAll('[data-action]').forEach(button => {
     button.addEventListener('click', () => {
         const action = button.dataset.action;
@@ -289,12 +289,12 @@ document.querySelectorAll('[data-action]').forEach(button => {
     });
 });
 
-// Theme toggle
+// bright dark
 const themeToggle = document.getElementById('themeToggle');
 const body = document.body;
 const icon = themeToggle.querySelector('.icon');
 
-// Check for saved theme preference or default to dark mode
+
 const currentTheme = localStorage.getItem('theme') || 'dark';
 if (currentTheme === 'light') {
     body.classList.add('light-mode');
@@ -313,12 +313,12 @@ themeToggle.addEventListener('click', () => {
     }
 });
 
-// Clear history button
+// history
 document.getElementById('clearHistory').addEventListener('click', () => {
     calculator.clearHistory();
 });
 
-// Keyboard support
+// Keyboard
 document.addEventListener('keydown', (e) => {
     // Numbers and decimal point
     if ((e.key >= '0' && e.key <= '9') || e.key === '.') {
@@ -326,7 +326,7 @@ document.addEventListener('keydown', (e) => {
         calculator.updateDisplay();
     }
     
-    // Operations
+    // plus minus divide
     if (e.key === '+') {
         calculator.chooseOperation('+');
         calculator.updateDisplay();
@@ -345,7 +345,7 @@ document.addEventListener('keydown', (e) => {
         calculator.updateDisplay();
     }
     
-    // Enter or equals
+    // enter ba equal
     if (e.key === 'Enter' || e.key === '=') {
         e.preventDefault();
         calculator.compute();
@@ -358,7 +358,7 @@ document.addEventListener('keydown', (e) => {
         calculator.updateDisplay();
     }
     
-    // Escape to clear
+    // Escape
     if (e.key === 'Escape') {
         calculator.clear();
         calculator.updateDisplay();
