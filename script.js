@@ -3,7 +3,6 @@ class Calculator {
         this.previousOperandElement = previousOperandElement;
         this.currentOperandElement = currentOperandElement;
         this.clear();
-        this.history = [];
     }
 
     clear() {
@@ -56,9 +55,6 @@ class Calculator {
             default: return;
         }
 
-        const expression = `${this.previousOperand} ${this.operation} ${this.currentOperand}`;
-        this.addToHistory(expression, computation);
-
         this.currentOperand = computation.toString();
         this.operation = undefined;
         this.previousOperand = '';
@@ -69,21 +65,20 @@ class Calculator {
         const current = parseFloat(this.currentOperand);
         if (isNaN(current)) return;
 
-        let result, expression;
+        let result;
         switch (operation) {
-            case 'sqrt': result = Math.sqrt(current); expression = `√${current}`; break;
-            case 'square': result = Math.pow(current, 2); expression = `${current}²`; break;
-            case 'cube': result = Math.pow(current, 3); expression = `${current}³`; break;
-            case 'sin': result = Math.sin(current); expression = `sin(${current})`; break;
-            case 'cos': result = Math.cos(current); expression = `cos(${current})`; break;
-            case 'tan': result = Math.tan(current); expression = `tan(${current})`; break;
-            case 'log': result = current > 0 ? Math.log10(current) : 'Error'; expression = `log(${current})`; break;
-            case 'ln': result = current > 0 ? Math.log(current) : 'Error'; expression = `ln(${current})`; break;
-            case 'percent': result = current / 100; expression = `${current}%`; break;
+            case 'sqrt': result = Math.sqrt(current); break;
+            case 'square': result = Math.pow(current, 2); break;
+            case 'cube': result = Math.pow(current, 3); break;
+            case 'sin': result = Math.sin(current); break;
+            case 'cos': result = Math.cos(current); break;
+            case 'tan': result = Math.tan(current); break;
+            case 'log': result = current > 0 ? Math.log10(current) : 'Error'; break;
+            case 'ln': result = current > 0 ? Math.log(current) : 'Error'; break;
+            case 'percent': result = current / 100; break;
             default: return;
         }
 
-        this.addToHistory(expression, result);
         this.currentOperand = result.toString();
         this.shouldResetScreen = true;
     }
@@ -100,37 +95,6 @@ class Calculator {
             default: return;
         }
         this.currentOperand = this.currentOperand === '0' ? value : this.currentOperand + value;
-    }
-
-    addToHistory(expression, result) {
-        const historyItem = { expression: expression, result: result };
-        this.history.unshift(historyItem);
-        if (this.history.length > 50) this.history.pop();
-        this.updateHistoryDisplay();
-    }
-
-    updateHistoryDisplay() {
-        const historyList = document.getElementById('historyList');
-        if (this.history.length === 0) {
-            historyList.innerHTML = '<p class="no-history">No calculations yet</p>';
-            return;
-        }
-        historyList.innerHTML = '';
-        this.history.forEach((item, index) => {
-            const historyItem = document.createElement('div');
-            historyItem.classList.add('history-item');
-            historyItem.innerHTML = `<div class="calculation">${item.expression}</div><div class="result">= ${this.formatNumber(item.result)}</div>`;
-            historyItem.addEventListener('click', () => {
-                this.currentOperand = item.result.toString();
-                this.updateDisplay();
-            });
-            historyList.appendChild(historyItem);
-        });
-    }
-
-    clearHistory() {
-        this.history = [];
-        this.updateHistoryDisplay();
     }
 
     formatNumber(number) {
@@ -201,10 +165,6 @@ themeToggle.addEventListener('click', () => {
         icon.textContent = '🌙';
         localStorage.setItem('theme', 'dark');
     }
-});
-
-document.getElementById('clearHistory').addEventListener('click', () => {
-    calculator.clearHistory();
 });
 
 document.addEventListener('keydown', (e) => {
